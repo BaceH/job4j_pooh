@@ -6,6 +6,7 @@ import ru.job4j.server.PoohServerSocket;
 public class Main {
     public static void main( String[] args )
     {
+
         String server = "localhost";
         int port = 8081;
         if( args[0].equals("server") )

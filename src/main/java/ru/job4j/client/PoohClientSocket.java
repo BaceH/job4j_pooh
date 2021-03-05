@@ -5,7 +5,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class PoohClientSocket {
-
     private int port;
     private String server;
 
