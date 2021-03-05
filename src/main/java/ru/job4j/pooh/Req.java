@@ -8,14 +8,22 @@ public class Req {
     }
 
     public String valueOf(String key) {
+        if (text.contains("key")) {
+            return "key";
+        }
         return null;
     }
 
     public String mode() {
-        return null;
+        if (text.contains("queue"))
+            return "queue";
+        return "topic";
     }
 
     public String method() {
-        return null;
+        if (valueOf("GET") == null){
+            return "POST";
+        }
+        return "GET";
     }
 }

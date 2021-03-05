@@ -28,6 +28,7 @@ public class PoohServer {
                         var total = input.read(buff);
                         var text = new String(Arrays.copyOfRange(buff, 0, total), StandardCharsets.UTF_8);
                         var req = new Req(text);
+
                         var resp = modes.get(req.mode()).process(req);
                         out.write(("HTTP/1.1 " + resp.status() + " OK\r\n").getBytes());
                         out.write(resp.text().getBytes());
