@@ -1,6 +1,7 @@
 package ru.job4j.server;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -30,24 +31,18 @@ public class PoohServerSocket extends Thread{
     }
 
     @Override
-    public void run()
-    {
+    public void run(){
         running = true;
-        while( running )
-        {
-            try
-            {
-                System.out.println( "Listening for a connection" );
+        while( running ){
+            try{
 
-                // Call accept() to receive the next connection
+                System.out.println( "Listening for a connection ..." );
+
                 Socket socket = serverSocket.accept();
-
-                // Pass the socket to the RequestHandler thread for processing
                 RequestHandler  requestHandler = new RequestHandler( socket );
                 requestHandler.start();
             }
-            catch (IOException e)
-            {
+            catch (IOException e){
                 e.printStackTrace();
             }
         }
