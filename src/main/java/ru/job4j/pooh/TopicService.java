@@ -9,17 +9,11 @@ public class TopicService implements Service {
     private final Map<Integer,Map<String, ConcurrentLinkedQueue<String>>> consumerTopic = new ConcurrentHashMap<>();
 
     private boolean put(String name, String text) {
+        topic.putIfAbsent(name,new ConcurrentLinkedQueue<>());
 
-        if (!topic.containsKey(name)) {
-            topic.put(name, new ConcurrentLinkedQueue<>());
-            if (!consumerTopic.isEmpty()){
-                for (Map.Entry<Integer,Map<String, ConcurrentLinkedQueue<String>>> entry : consumerTopic.entrySet()) {
-                    entry.getValue().put(name, new ConcurrentLinkedQueue<>());
-                }
-            }
-        }
         if (!consumerTopic.isEmpty()){
             for (Map.Entry<Integer,Map<String, ConcurrentLinkedQueue<String>>> entry : consumerTopic.entrySet()) {
+                entry.getValue().putIfAbsent(name, new ConcurrentLinkedQueue<>());
                 entry.getValue().get(name).offer(text);
             }
         }

@@ -8,10 +8,7 @@ public class QueueService implements Service {
     private final Map<String, ConcurrentLinkedQueue<String>> queue = new ConcurrentHashMap<>();
 
     private boolean put(String name, String text) {
-
-        if (!queue.containsKey(name)) {
-            queue.put(name, new ConcurrentLinkedQueue<>());
-        }
+        queue.putIfAbsent(name, new ConcurrentLinkedQueue<>());
         return queue.get(name).offer(text);
     }
 
