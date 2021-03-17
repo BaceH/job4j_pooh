@@ -13,11 +13,8 @@ public class QueueService implements Service {
     }
 
     private String take(String name) {
-        String result = null;
-        if (queue.containsKey(name)) {
-            result = queue.get(name).poll();
-        }
-        return result;
+
+        return queue.get(name).poll();
     }
 
     @Override
